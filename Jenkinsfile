@@ -1,3 +1,4 @@
+currentBuild.displayName = "train-schedule-#" + currentBuild.number
 pipeline {
   agent any 
   stages {
