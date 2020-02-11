@@ -17,6 +17,8 @@ pipeline {
          }
          steps {
            withCredentials([usernamePassword(credentialID: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+             sh 'echo $USERNAME'
+             sh 'echo $USERPASS'
              sshPublisher (
                failOnError: true, 
                continueOnError: false,
@@ -24,8 +26,8 @@ pipeline {
                  sshPublisherDesc (
                    configName: 'staging',
                    sshCredentials: [
-                     username: "deploy",
-                     encryptedPassphrase: "jenkins"
+                     username: "$USERNAME",
+                     encryptedPassphrase: "$USERPASS"
                    ],
                    transfers: [
                      sshTransfer (
